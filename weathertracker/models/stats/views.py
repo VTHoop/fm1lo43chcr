@@ -27,7 +27,7 @@ def stats():
     # get measure for each metric and statistic provided
     for metric in request.args.getlist('metric'):
         for stat in request.args.getlist('stat'):
-            new_stats = metric_functions[metric](stat, query_measurements)
+            new_stats = metric_functions[stat](metric, query_measurements)
             if new_stats:
                 statistic_list.append(new_stats)
     return jsonify(statistic_list)
