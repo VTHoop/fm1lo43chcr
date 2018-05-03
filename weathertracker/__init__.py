@@ -1,6 +1,13 @@
 from flask import Flask, request, jsonify
+from weathertracker.models.measurements.views import measurement_blueprint
+from weathertracker.models.stats.views import statistic_blueprint
+
 
 app = Flask('weathertracker')
+
+app.register_blueprint(measurement_blueprint, url_prefix='/measurements')
+app.register_blueprint(statistic_blueprint, url_prefix='/stats')
+
 
 # TODO: Implement the endpoints in the ATs.
 # The below stubs are provided as a starting point.
@@ -9,61 +16,18 @@ app = Flask('weathertracker')
 
 not_implemented = 'Not Implemented\n', 501, { 'Content-Type': 'text/plain' }
 
+
 # dummy handler so you can tell if the server is running
 # e.g. `curl localhost:8000`
 @app.route('/')
 def root():
     return 'Weather tracker is up and running!\n'
 
-# features/01-measurements/01-add-measurement.feature
-@app.route('/measurements', methods=['POST'])
-def create_measurement():
-    # Example:
-    # assert request.get_json() == {
-    #     'timestamp': '2015-09-01T16:00:00.000Z',
-    #     'temperature': 27.1,
-    #     'dewPoint': 16.7,
-    #     'precipitation': 0
-    # }
 
-    return not_implemented
-
-@app.route('/measurements/<timestamp>', methods=['GET', 'PUT', 'PATCH', 'DELETE'])
-def update_measurement(timestamp):
-    # features/01-measurements/02-get-measurement.feature
-    if request.method == 'GET':
-        # Example 1:
-        # assert timestamp == '2015-09-01T16:20:00.000Z'
-        #
-        # return jsonify({
-        #     'timestamp': '2015-09-01T16:00:00.000Z',
-        #     'temperature': 27.1,
-        #     'dewPoint': 16.7,
-        #     'precipitation': 0
-        # })
-
-        # Example 2:
-        # assert timestamp == '2015-09-01T16:20:00.000Z'
-        #
-        # return jsonify([
-        #     {
-        #         'timestamp': '2015-09-01T16:00:00.000Z',
-        #         'temperature': 27.1,
-        #         'dewPoint': 16.7,
-        #         'precipitation': 0
-        #     },
-        #     {
-        #         'timestamp': '2015-09-01T16:10:00.000Z',
-        #         'temperature': 27.3,
-        #         'dewPoint': 16.9,
-        #         'precipitation': 0
-        #     }
-        # ])
-
-        return not_implemented
-
+# @app.route('/measurements/<timestamp>', methods=['PUT', 'PATCH', 'DELETE'])
+# def update_measurement(timestamp):
     # features/01-measurements/03-update-measurement.feature
-    if request.method == 'PUT':
+    # if request.method == 'PUT':
         # Example:
         # assert timestamp == '2015-09-01T16:20:00.000Z'
         #
@@ -74,10 +38,10 @@ def update_measurement(timestamp):
         #     'precipitation': 15.2
         # }
 
-        return not_implemented
+        # return not_implemented
 
     # features/01-measurements/03-update-measurement.feature
-    if request.method == 'PATCH':
+    # if request.method == 'PATCH':
         # Example:
         # assert timestamp == '2015-09-01T16:20:00.000Z'
         #
@@ -86,18 +50,18 @@ def update_measurement(timestamp):
         #     'precipitation': 15.2
         # }
 
-        return not_implemented
+        # return not_implemented
 
     # features/01-measurements/04-delete-measurement.feature
-    if request.method == 'DELETE':
+    # if request.method == 'DELETE':
         # Example:
         # assert timestamp == '2015-09-01T16:20:00.000Z'
 
-        return not_implemented
+        # return not_implemented
 
 # features/02-stats/01-get-stats.feature
-@app.route('/stats')
-def stats():
+# @app.route('/stats')
+# def stats():
     # Example:
     # assert request.args.getlist('metric') == [
     #     'temperature',
@@ -132,4 +96,4 @@ def stats():
     #     }
     # ])
 
-    return not_implemented
+    # return not_implemented
