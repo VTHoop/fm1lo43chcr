@@ -16,6 +16,8 @@ class Measurement(object):
     @staticmethod
     def measurement_data_points():
         """
+        To ensure that only the data points setup to evaluate are being looked at in the GET request.  Others
+        will be ignored.
         :return: Object returning the data types of the properties for Measurement object
         """
         return ["temperature", "dewPoint", "precipitation"]
@@ -58,6 +60,8 @@ class Measurement(object):
         :return: True if all measurements are float, False otherwise
         """
         try:
+            # this ensures only those properties that this class is setup to intake are checked against
+            # if other parameters are passed, then they will be ignored
             for obj_prop in Measurement.measurement_data_points():
                 if obj_prop in list(json_request.keys()):
                     float(json_request[obj_prop])
